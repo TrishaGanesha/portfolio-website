@@ -5,75 +5,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trisha G | Data Analyst Portfolio</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #f4f6f9;
+    font-family: 'Poppins', sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
 }
 
 header {
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    color: white;
     text-align: center;
-    padding: 50px 20px;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
 }
 
-header h1 { font-size: 2.8rem; margin: 0; }
+header h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+header p {
+    margin-top: 10px;
+    color: #94a3b8;
+}
 
 nav {
-    background: white;
-    padding: 12px;
     text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 15px;
+    background: #020617;
 }
 
 nav a {
+    color: #cbd5f5;
     margin: 0 15px;
     text-decoration: none;
-    color: #333;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 section {
     max-width: 1100px;
     margin: auto;
-    padding: 40px 20px;
+    padding: 50px 20px;
 }
 
 .card {
-    background: white;
-    padding: 20px;
+    background: #1e293b;
+    padding: 25px;
     margin: 20px 0;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     transition: 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.01);
 }
 
 h2 {
-    border-left: 6px solid #2c5364;
-    padding-left: 10px;
+    color: #38bdf8;
 }
 
 .btn {
     display: inline-block;
-    margin-top: 10px;
-    padding: 10px 15px;
-    background: #2c5364;
-    color: white;
-    border-radius: 6px;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background: #38bdf8;
+    color: #020617;
+    border-radius: 8px;
     text-decoration: none;
+    font-weight: 600;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
 }
 
 footer {
     text-align: center;
     padding: 20px;
-    background: #2c5364;
-    color: white;
+    background: #020617;
 }
 </style>
 </head>
@@ -82,8 +96,8 @@ footer {
 
 <header>
     <h1>Trisha G</h1>
-    <p>Data Analyst | MCA AI & Data Science | Gold Medalist</p>
-    <a href="#projects" class="btn">View Projects</a>
+    <p>Data Analyst | AI & Data Science | Gold Medalist</p>
+    <a href="#projects" class="btn">Explore My Work</a>
 </header>
 
 <nav>
@@ -96,21 +110,20 @@ footer {
 <section id="about">
 <h2>About Me</h2>
 <div class="card">
-<p>University Gold Medalist with strong foundation in Mathematics and Data Science. Skilled in Python, SQL, and data analysis with hands-on experience in real-world datasets and business simulations.</p>
-<p>Interested in Data Analytics, Machine Learning, and Business Intelligence roles.</p>
+<p>I am a University Gold Medalist and MCA student specializing in AI & Data Science. I focus on solving real-world problems using data analytics, statistical reasoning, and intelligent systems.</p>
+<p>I have hands-on experience in EDA, SQL analytics, and building interpretable models like fuzzy logic-based fraud detection systems.</p>
 </div>
 </section>
 
 <section id="skills">
 <h2>Skills</h2>
-<div class="card">
-<ul>
-<li>Python, SQL</li>
-<li>EDA, Data Cleaning, Visualization</li>
-<li>Statistics & Probability</li>
-<li>Excel, Power BI (Learning)</li>
-<li>Machine Learning (Basics)</li>
-</ul>
+<div class="skills-grid">
+<div class="card">Python</div>
+<div class="card">SQL</div>
+<div class="card">EDA & Visualization</div>
+<div class="card">Statistics</div>
+<div class="card">Machine Learning Basics</div>
+<div class="card">Excel & Power BI</div>
 </div>
 </section>
 
@@ -118,27 +131,25 @@ footer {
 <h2>Projects</h2>
 
 <div class="card">
-<h3>🔍 Financial Fraud Detection System</h3>
-<p><strong>Approach:</strong> Fuzzy Logic-based classification model.</p>
-<p><strong>Key Work:</strong></p>
+<h3>🔍 Financial Fraud Detection</h3>
+<p>Built a fuzzy logic-based system to classify transaction risk under uncertainty.</p>
 <ul>
-<li>Generated risk score (0–1)</li>
-<li>Classified transactions into risk categories</li>
-<li>Used Pandas, NumPy, Matplotlib</li>
+<li>Risk scoring (0–1)</li>
+<li>Rule-based inference</li>
+<li>Visualization with Python</li>
 </ul>
-<p><strong>Insight:</strong> High-value transactions with unusual patterns showed highest fraud probability.</p>
-<p><strong>Special:</strong> Used fuzzy inference instead of rigid ML for better interpretability.</p>
-<a href="https://github.com/TrishaGanesha" class="btn">View Code</a>
+<p><strong>Key Insight:</strong> Irregular high-value transactions show highest fraud probability.</p>
+<a href="https://github.com/TrishaGanesha" class="btn">View Project</a>
 </div>
 
 <div class="card">
-<h3>📊 Exploratory Data Analysis</h3>
-<p>Performed complete EDA including cleaning, visualization, and insights generation.</p>
+<h3>📊 Data Analysis Project</h3>
+<p>Performed end-to-end EDA on real datasets including cleaning, transformation, and visualization.</p>
 </div>
 
 <div class="card">
 <h3>🗄 SQL Analytics</h3>
-<p>Designed relational databases and performed advanced queries with joins and aggregations.</p>
+<p>Designed databases and performed complex queries to derive insights.</p>
 </div>
 
 </section>
@@ -147,13 +158,13 @@ footer {
 <h2>Contact</h2>
 <div class="card">
 <p>Email: trishaganesh106@gmail.com</p>
-<p><a href="https://www.linkedin.com/in/trisha-g-a8b00131a/">LinkedIn</a></p>
-<p><a href="https://github.com/TrishaGanesha">GitHub</a></p>
+<p><a href="https://www.linkedin.com/in/trisha-g-a8b00131a/" style="color:#38bdf8">LinkedIn</a></p>
+<p><a href="https://github.com/TrishaGanesha" style="color:#38bdf8">GitHub</a></p>
 </div>
 </section>
 
 <footer>
-<p>© 2026 Trisha G</p>
+<p>© 2026 Trisha G | Portfolio</p>
 </footer>
 
 </body>
