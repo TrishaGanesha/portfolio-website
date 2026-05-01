@@ -1,62 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Trisha Portfolio</title>
-    <style>
-        body {
-            font-family: Arial;
-            margin: 0;
-            background: #f4f4f4;
-        }
-        header {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        section {
-            padding: 20px;
-        }
-        .project {
-            background: white;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trisha G | Data Analyst Portfolio</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6f9;
+}
+
+header {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+header h1 { font-size: 2.8rem; margin: 0; }
+
+nav {
+    background: white;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+h2 {
+    border-left: 6px solid #2c5364;
+    padding-left: 10px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: #2c5364;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #2c5364;
+    color: white;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>Hi, I'm Trisha 👩‍💻</h1>
-    <p>MCA | AI & Data Science | Aspiring Data Analyst</p>
+    <h1>Trisha G</h1>
+    <p>Data Analyst | MCA AI & Data Science | Gold Medalist</p>
+    <a href="#projects" class="btn">View Projects</a>
 </header>
 
-<section>
-    <h2>Projects</h2>
+<nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-    <div class="project">
-        <h3>Financial Fraud Detection</h3>
-        <p>Fuzzy logic-based system to classify transactions into risk levels.</p>
-    </div>
+<section id="about">
+<h2>About Me</h2>
+<div class="card">
+<p>University Gold Medalist with strong foundation in Mathematics and Data Science. Skilled in Python, SQL, and data analysis with hands-on experience in real-world datasets and business simulations.</p>
+<p>Interested in Data Analytics, Machine Learning, and Business Intelligence roles.</p>
+</div>
+</section>
 
-    <div class="project">
-        <h3>Data Analysis Project</h3>
-        <p>Used Python for data cleaning and visualization.</p>
-    </div>
+<section id="skills">
+<h2>Skills</h2>
+<div class="card">
+<ul>
+<li>Python, SQL</li>
+<li>EDA, Data Cleaning, Visualization</li>
+<li>Statistics & Probability</li>
+<li>Excel, Power BI (Learning)</li>
+<li>Machine Learning (Basics)</li>
+</ul>
+</div>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+
+<div class="card">
+<h3>🔍 Financial Fraud Detection System</h3>
+<p><strong>Approach:</strong> Fuzzy Logic-based classification model.</p>
+<p><strong>Key Work:</strong></p>
+<ul>
+<li>Generated risk score (0–1)</li>
+<li>Classified transactions into risk categories</li>
+<li>Used Pandas, NumPy, Matplotlib</li>
+</ul>
+<p><strong>Insight:</strong> High-value transactions with unusual patterns showed highest fraud probability.</p>
+<p><strong>Special:</strong> Used fuzzy inference instead of rigid ML for better interpretability.</p>
+<a href="https://github.com/TrishaGanesha" class="btn">View Code</a>
+</div>
+
+<div class="card">
+<h3>📊 Exploratory Data Analysis</h3>
+<p>Performed complete EDA including cleaning, visualization, and insights generation.</p>
+</div>
+
+<div class="card">
+<h3>🗄 SQL Analytics</h3>
+<p>Designed relational databases and performed advanced queries with joins and aggregations.</p>
+</div>
 
 </section>
 
-<section>
-    <h2>Skills</h2>
-    <p>Python, SQL, Excel, Machine Learning Basics</p>
+<section id="contact">
+<h2>Contact</h2>
+<div class="card">
+<p>Email: trishaganesh106@gmail.com</p>
+<p><a href="https://www.linkedin.com/in/trisha-g-a8b00131a/">LinkedIn</a></p>
+<p><a href="https://github.com/TrishaGanesha">GitHub</a></p>
+</div>
 </section>
 
-<section>
-    <h2>Contact</h2>
-    <p>Email: yourmail@gmail.com</p>
-</section>
+<footer>
+<p>© 2026 Trisha G</p>
+</footer>
 
 </body>
 </html>
