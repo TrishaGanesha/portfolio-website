@@ -4,24 +4,113 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trisha G | Data Analyst Portfolio</title>
-<link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-body { margin:0; font-family:'Poppins',sans-serif; background:#0f172a; color:#e2e8f0; }
-header { text-align:center; padding:80px 20px; background:linear-gradient(135deg,#1e293b,#0f172a); }
-header h1 { font-size:3rem; margin:0; }
-header p { color:#94a3b8; }
-nav { text-align:center; padding:15px; background:#020617; }
-nav a { color:#cbd5f5; margin:0 15px; text-decoration:none; }
-section { max-width:1100px; margin:auto; padding:50px 20px; }
-.card { background:#1e293b; padding:25px; margin:20px 0; border-radius:16px; box-shadow:0 10px 25px rgba(0,0,0,0.3); }
-.card:hover { transform:translateY(-6px); }
-h2 { color:#38bdf8; }
-.btn { display:inline-block; margin-top:15px; padding:10px 18px; background:#38bdf8; color:#020617; border-radius:8px; text-decoration:none; font-weight:600; }
-.skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:15px; }
-img { border-radius:10px; margin-top:10px; }
-footer { text-align:center; padding:20px; background:#020617; }
+body {
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(120deg,#0f172a,#020617);
+    color:#e2e8f0;
+    scroll-behavior:smooth;
+}
+
+header {
+    text-align:center;
+    padding:100px 20px;
+}
+
+header h1 {
+    font-size:3.2rem;
+    margin:0;
+    background:linear-gradient(to right,#38bdf8,#a78bfa);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+header p {
+    color:#94a3b8;
+    margin-top:10px;
+}
+
+.btn {
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 20px;
+    background:linear-gradient(to right,#38bdf8,#a78bfa);
+    color:#020617;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.btn:hover { transform:scale(1.05); }
+
+nav {
+    position:sticky;
+    top:0;
+    backdrop-filter:blur(10px);
+    background:rgba(2,6,23,0.7);
+    text-align:center;
+    padding:12px;
+}
+
+nav a {
+    color:#cbd5f5;
+    margin:0 15px;
+    text-decoration:none;
+    font-weight:500;
+}
+
+section {
+    max-width:1100px;
+    margin:auto;
+    padding:60px 20px;
+}
+
+.card {
+    background:rgba(30,41,59,0.6);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:25px;
+    margin:20px 0;
+    border-radius:18px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 30px rgba(0,0,0,0.3);
+    transition:0.3s;
+}
+
+.card:hover {
+    transform:translateY(-8px);
+}
+
+h2 {
+    color:#38bdf8;
+    margin-bottom:20px;
+}
+
+.skills-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.skills-grid .card {
+    text-align:center;
+}
+
+img {
+    width:100%;
+    max-width:320px;
+    border-radius:12px;
+    margin-top:10px;
+}
+
+footer {
+    text-align:center;
+    padding:20px;
+    background:#020617;
+}
 </style>
 </head>
 
@@ -29,7 +118,7 @@ footer { text-align:center; padding:20px; background:#020617; }
 
 <header>
 <h1>Trisha G</h1>
-<p>Data Analyst | AI & Data Science | Gold Medalist</p>
+<p id="typing"></p>
 <a href="resume.pdf" class="btn">Download Resume</a>
 </header>
 
@@ -43,7 +132,7 @@ footer { text-align:center; padding:20px; background:#020617; }
 <section id="about">
 <h2>About Me</h2>
 <div class="card">
-<p>University Gold Medalist with strong foundation in Mathematics and Data Science. Skilled in Python, SQL, and real-world data analysis.</p>
+<p>Gold Medalist and MCA student specializing in AI & Data Science. Passionate about solving real-world problems using data analytics, statistics, and intelligent systems.</p>
 </div>
 </section>
 
@@ -64,30 +153,18 @@ footer { text-align:center; padding:20px; background:#020617; }
 
 <div class="card">
 <h3>🔍 Financial Fraud Detection</h3>
-<p>Fuzzy logic-based system for fraud classification.</p>
-<ul>
-<li>Risk scoring system</li>
-<li>Transaction classification</li>
-<li>Python visualization</li>
-</ul>
-<p><strong>Insight:</strong> High-value abnormal transactions show highest fraud risk.</p>
-
-<!-- ADD YOUR IMAGES HERE -->
-<img src="fraud1.png" width="300">
-<img src="fraud2.png" width="300">
-
+<p>Fuzzy logic-based system for fraud classification under uncertainty.</p>
+<img src="fraud1.png">
+<img src="fraud2.png">
 <a href="https://github.com/TrishaGanesha" class="btn">View Project</a>
 </div>
 
 <div class="card">
-<h3>📊 EDA Project</h3>
-<p>Performed data cleaning and visualization.</p>
-<img src="eda.png" width="300">
-</div>
-
-<div class="card">
-<h3>🗄 SQL Analytics</h3>
-<p>Advanced SQL queries and database design.</p>
+<h3>📊 Customer Churn Analysis</h3>
+<p>Analyzed telecom data to identify customer churn patterns.</p>
+<img src="churn1.png">
+<img src="churn2.png">
+<a href="#" class="btn">View Project</a>
 </div>
 
 </section>
@@ -104,6 +181,19 @@ footer { text-align:center; padding:20px; background:#020617; }
 <footer>
 <p>© 2026 Trisha G</p>
 </footer>
+
+<script>
+const text = "Data Analyst | AI & Data Science | Gold Medalist";
+let i = 0;
+function typing(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typing,50);
+  }
+}
+typing();
+</script>
 
 </body>
 </html>
