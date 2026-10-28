@@ -1,1460 +1,217 @@
+
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-bg="ocean">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trisha G | Developer & Data Science Portfolio</title>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --font-heading: 'Outfit', sans-serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
-            
-            --primary: #06b6d4;
-            --primary-glow: rgba(6, 182, 212, 0.4);
-            --accent-pink: #f472b6;
-            --accent-blue: #38bdf8;
-            
-            --bg-base: #0f172a;
-            --card-bg: rgba(15, 23, 42, 0.7);
-            --card-border: rgba(255, 255, 255, 0.12);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            
-            --nav-bg: rgba(15, 23, 42, 0.85);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Ocean Floral Theme Overrides */
-        [data-bg="ocean"] {
-            --primary: #0284c7;
-            --primary-glow: rgba(56, 189, 248, 0.5);
-            --bg-base: #e0f2fe;
-            --card-bg: rgba(255, 255, 255, 0.65);
-            --card-border: rgba(255, 255, 255, 0.8);
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --shadow-color: rgba(14, 165, 233, 0.15);
-            --nav-bg: rgba(255, 255, 255, 0.75);
-        }
-
-        [data-theme="light"][data-bg="space"] {
-            --bg-base: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(0, 0, 0, 0.08);
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --shadow-color: rgba(0, 0, 0, 0.05);
-            --nav-bg: rgba(255, 255, 255, 0.9);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.5s ease, color 0.5s ease;
-            position: relative;
-            min-height: 100vh;
-        }
-
-        /* Background Canvas */
-        #bgCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Glassmorphism Containers */
-        .glass-panel {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-        }
-
-        /* Navbar */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 2rem;
-            transition: var(--transition);
-        }
-
-        .navbar {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1.5rem;
-            border-radius: 100px;
-            background: var(--nav-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            box-shadow: 0 4px 20px var(--shadow-color);
-        }
-
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-main);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .controls-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 4px;
-            border-radius: 100px;
-            border: 1px solid var(--card-border);
-        }
-
-        [data-bg="space"] .controls-group {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .icon-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: grid;
-            place-items: center;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .icon-btn:hover {
-            background: var(--primary-glow);
-            color: #fff;
-        }
-
-        /* Sections */
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 7rem 1.5rem 4rem;
-        }
-
-        .section {
-            margin-bottom: 6rem;
-            scroll-margin-top: 6rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-subtitle {
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        /* Hero Section */
-        .hero-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            min-height: 70vh;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 1rem;
-            border-radius: 100px;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-title {
-            font-family: var(--font-heading);
-            font-size: 3.2rem;
-            line-height: 1.15;
-            font-weight: 800;
-            margin-bottom: 1.2rem;
-        }
-
-        .hero-title span {
-            background: linear-gradient(135deg, var(--primary), var(--accent-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-desc {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), #0284c7);
-            color: #fff;
-            padding: 0.8rem 1.8rem;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 15px var(--primary-glow);
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--primary-glow);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-main);
-            padding: 0.8rem 1.8rem;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            border: 1px solid var(--card-border);
-            transition: var(--transition);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--primary);
-        }
-
-        .hero-card-display {
-            padding: 2.5rem;
-            position: relative;
-        }
-
-        .profile-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.2rem;
-        }
-
-        .stat-item {
-            padding: 1.2rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            border: 1px solid var(--card-border);
-        }
-
-        .stat-num {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* About Cards */
-        .about-card {
-            padding: 3rem;
-            display: grid;
-            grid-template-columns: 3fr 2fr;
-            gap: 3rem;
-        }
-
-        .about-text p {
-            margin-bottom: 1.2rem;
-            font-size: 1.05rem;
-            color: var(--text-muted);
-        }
-
-        .about-text strong {
-            color: var(--text-main);
-        }
-
-        .highlights-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .hl-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.2rem;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--card-border);
-        }
-
-        .hl-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--primary-glow);
-            color: #fff;
-            display: grid;
-            place-items: center;
-            font-size: 1.2rem;
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-card {
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            transition: var(--transition);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .skill-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 16px;
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--primary);
-            display: grid;
-            place-items: center;
-            font-size: 1.6rem;
-        }
-
-        .skill-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .skill-level {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* Projects Section */
-        .projects-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        .search-box {
-            position: relative;
-            flex: 1;
-            min-width: 260px;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 0.8rem 1rem 0.8rem 3rem;
-            border-radius: 100px;
-            border: 1px solid var(--card-border);
-            background: var(--card-bg);
-            color: var(--text-main);
-            outline: none;
-            font-family: inherit;
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
-        }
-
-        .filter-tags {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-        }
-
-        .tag-btn {
-            padding: 0.5rem 1.2rem;
-            border-radius: 100px;
-            border: 1px solid var(--card-border);
-            background: var(--card-bg);
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .tag-btn.active, .tag-btn:hover {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: var(--transition);
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--primary);
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .folder-icon {
-            font-size: 2rem;
-            color: var(--primary);
-        }
-
-        .project-links a {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .project-links a:hover {
-            color: var(--primary);
-        }
-
-        .project-card h3 {
-            font-family: var(--font-heading);
-            font-size: 1.35rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .project-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-stack {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tech-pill {
-            padding: 0.25rem 0.75rem;
-            border-radius: 100px;
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--primary);
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Contact Section */
-        .contact-wrapper {
-            padding: 3rem;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 3rem;
-        }
-
-        .contact-info p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 2rem;
-        }
-
-        .contact-method {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            margin-bottom: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .contact-icon-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 16px;
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--primary);
-            display: grid;
-            place-items: center;
-            font-size: 1.3rem;
-        }
-
-        .contact-details h4 {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .contact-details span {
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .form-group label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .form-input {
-            padding: 0.8rem 1.2rem;
-            border-radius: 12px;
-            border: 1px solid var(--card-border);
-            background: rgba(0, 0, 0, 0.1);
-            color: var(--text-main);
-            outline: none;
-            font-family: inherit;
-            transition: var(--transition);
-        }
-
-        [data-bg="ocean"] .form-input {
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .form-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
-        }
-
-        textarea.form-input {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--card-border);
-        }
-
-        /* --- Mini Robot Companion Widget --- */
-        #robotCompanion {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            pointer-events: none;
-            transform: translate3d(-50%, -50%, 0);
-            transition: opacity 0.3s ease;
-        }
-
-        .robot-wrapper {
-            position: relative;
-            width: 70px;
-            height: 70px;
-            cursor: pointer;
-            pointer-events: auto;
-        }
-
-        .robot-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 6px 12px rgba(6, 182, 212, 0.4));
-            transition: transform 0.2s ease;
-        }
-
-        .robot-wrapper:hover .robot-svg {
-            transform: scale(1.1);
-        }
-
-        /* Speech Bubble */
-        .speech-bubble {
-            position: absolute;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(15, 23, 42, 0.95);
-            color: #fff;
-            padding: 0.6rem 1.1rem;
-            border-radius: 16px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            white-space: nowrap;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--primary);
-            pointer-events: auto;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        [data-bg="ocean"] .speech-bubble {
-            background: rgba(255, 255, 255, 0.95);
-            color: #0f172a;
-        }
-
-        .speech-bubble.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(-5px);
-        }
-
-        .speech-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 6px 6px 0;
-            border-style: solid;
-            border-color: var(--primary) transparent;
-        }
-
-        /* Name Modal Overlay */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 10000;
-            display: grid;
-            place-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .name-modal {
-            width: 90%;
-            max-width: 420px;
-            padding: 2.5rem;
-            text-align: center;
-        }
-
-        .modal-robot-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 868px) {
-            .hero-section, .about-card, .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            .nav-links {
-                display: none;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trisha G's developer portfolio featuring software, AI and data analytics projects.">
+  <title>Trisha G | Developer Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <header class="header">
+    <a class="logo" href="#home">trisha<span>.</span></a>
 
-    <!-- Dynamic Background Canvas -->
-    <canvas id="bgCanvas"></canvas>
+    <nav id="navMenu" class="nav-menu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-    <!-- Navigation Header -->
-    <header>
-        <nav class="navbar">
-            <a href="#home" class="logo">Trisha<span>.</span></a>
-
-            <div class="nav-right">
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-
-                <div class="controls-group">
-                    <!-- Background Theme Toggle (Ocean Floral / Deep Space) -->
-                    <button class="icon-btn" id="bgToggleBtn" title="Toggle Ocean Floral / Deep Space Background">
-                        <i class="fa-solid fa-water"></i>
-                    </button>
-                    <!-- Light / Dark Mode Toggle -->
-                    <button class="icon-btn" id="themeToggleBtn" title="Toggle Light / Dark Mode">
-                        <i class="fa-solid fa-moon"></i>
-                    </button>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main id="home">
-        <!-- Hero Section -->
-        <section class="section hero-section">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fa-solid fa-sparkles"></i> MCA AI & Data Science Student
-                </div>
-                <h1 class="hero-title">Building Intelligent Systems & <br><span>Data-Driven Code</span></h1>
-                <p class="hero-desc">
-                    Hi! I'm <strong>Trisha G</strong>. Passionate about machine learning, analytical problem-solving, and building modern full-stack web solutions.
-                </p>
-                <div class="hero-btns">
-                    <a href="#projects" class="btn-primary">View Projects <i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="#contact" class="btn-secondary">Get In Touch</a>
-                </div>
-            </div>
-
-            <div class="glass-panel hero-card-display">
-                <div class="profile-stat-grid">
-                    <div class="stat-item">
-                        <div class="stat-num">MCA</div>
-                        <div class="stat-label">AI & Data Science</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-num">BSc</div>
-                        <div class="stat-label">CS & Mathematics</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-num">3+</div>
-                        <div class="stat-label">Core Projects</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-num">100%</div>
-                        <div class="stat-label">Dedicated Learner</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="section">
-            <div class="section-header">
-                <div class="section-subtitle">Biography</div>
-                <h2 class="section-title">About Me</h2>
-            </div>
-
-            <div class="glass-panel about-card">
-                <div class="about-text">
-                    <p>
-                        I am currently pursuing my <strong>Master of Computer Applications (MCA)</strong> in Artificial Intelligence and Data Science at <strong>Amrita Vishwa Vidyapeetham, Mysuru</strong>. Prior to this, I earned my Bachelor of Science (BSc) in Computer Science and Mathematics from the <strong>University of Mysore</strong>.
-                    </p>
-                    <p>
-                        My background in mathematics provides a strong mathematical foundation for tackling complex algorithms, data analytics, and software design problems. I love turning concepts into functional software applications.
-                    </p>
-                </div>
-
-                <div class="highlights-list">
-                    <div class="hl-card">
-                        <div class="hl-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                        <div>
-                            <h4 style="font-weight:700;">Education</h4>
-                            <p style="font-size:0.85rem; color:var(--text-muted);">MCA in AI & Data Science</p>
-                        </div>
-                    </div>
-                    <div class="hl-card">
-                        <div class="hl-icon"><i class="fa-solid fa-microchip"></i></div>
-                        <div>
-                            <h4 style="font-weight:700;">Specialization</h4>
-                            <p style="font-size:0.85rem; color:var(--text-muted);">AI, ML & Web Engineering</p>
-                        </div>
-                    </div>
-                    <div class="hl-card">
-                        <div class="hl-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div>
-                            <h4 style="font-weight:700;">Location</h4>
-                            <p style="font-size:0.85rem; color:var(--text-muted);">Mysuru, Karnataka, India</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Technical Skills Section -->
-        <section id="skills" class="section">
-            <div class="section-header">
-                <div class="section-subtitle">Expertise</div>
-                <h2 class="section-title">Technical Skills</h2>
-            </div>
-
-            <div class="skills-grid">
-                <div class="glass-panel skill-card">
-                    <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
-                    <div>
-                        <div class="skill-title">Python</div>
-                        <div class="skill-level">Core & Data Science</div>
-                    </div>
-                </div>
-                <div class="glass-panel skill-card">
-                    <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
-                    <div>
-                        <div class="skill-title">SQL</div>
-                        <div class="skill-level">Database Management</div>
-                    </div>
-                </div>
-                <div class="glass-panel skill-card">
-                    <div class="skill-icon"><i class="fa-brands fa-js"></i></div>
-                    <div>
-                        <div class="skill-title">JavaScript</div>
-                        <div class="skill-level">Web Applications</div>
-                    </div>
-                </div>
-                <div class="glass-panel skill-card">
-                    <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
-                    <div>
-                        <div class="skill-title">HTML5 & CSS3</div>
-                        <div class="skill-level">Responsive Design</div>
-                    </div>
-                </div>
-                <div class="glass-panel skill-card">
-                    <div class="skill-icon"><i class="fa-brands fa-react"></i></div>
-                    <div>
-                        <div class="skill-title">React.js</div>
-                        <div class="skill-level">Frontend Development</div>
-                    </div>
-                </div>
-                <div class="glass-panel skill-card">
-                    <div class="skill-icon"><i class="fa-brands fa-github"></i></div>
-                    <div>
-                        <div class="skill-title">Git & GitHub</div>
-                        <div class="skill-level">Version Control</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="section-header">
-                <div class="section-subtitle">Portfolio</div>
-                <h2 class="section-title">Featured Projects</h2>
-            </div>
-
-            <div class="projects-controls">
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" class="search-input" placeholder="Search projects by keyword...">
-                </div>
-                <div class="filter-tags">
-                    <button class="tag-btn active" data-filter="all">All</button>
-                    <button class="tag-btn" data-filter="Python">Python</button>
-                    <button class="tag-btn" data-filter="SQL">SQL</button>
-                    <button class="tag-btn" data-filter="Data Analysis">Data Analysis</button>
-                </div>
-            </div>
-
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Project 1 -->
-                <article class="glass-panel project-card" data-tags="Python Data Analysis">
-                    <div>
-                        <div class="project-header">
-                            <i class="fa-regular fa-folder-open folder-icon"></i>
-                            <div class="project-links">
-                                <a href="https://github.com/TrishaGanesha" target="_blank" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                            </div>
-                        </div>
-                        <h3>GovernAI</h3>
-                        <p>A corporate governance evaluation system designed to review complex documents against customizable compliance checklist requirements.</p>
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-pill">Python</span>
-                        <span class="tech-pill">Streamlit</span>
-                        <span class="tech-pill">SQLite</span>
-                    </div>
-                </article>
-
-                <!-- Project 2 -->
-                <article class="glass-panel project-card" data-tags="Python SQL">
-                    <div>
-                        <div class="project-header">
-                            <i class="fa-regular fa-folder-open folder-icon"></i>
-                            <div class="project-links">
-                                <a href="https://github.com/TrishaGanesha" target="_blank" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                            </div>
-                        </div>
-                        <h3>Issue Management System</h3>
-                        <p>A centralized software workflow application built for logging engineering issues, prioritizing resolution tasks, and tracking dynamic statuses.</p>
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-pill">Python</span>
-                        <span class="tech-pill">SQL</span>
-                        <span class="tech-pill">Web Tech</span>
-                    </div>
-                </article>
-
-                <!-- Project 3 -->
-                <article class="glass-panel project-card" data-tags="Python Data Analysis">
-                    <div>
-                        <div class="project-header">
-                            <i class="fa-regular fa-folder-open folder-icon"></i>
-                            <div class="project-links">
-                                <a href="https://github.com/TrishaGanesha" target="_blank" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
-                            </div>
-                        </div>
-                        <h3>Smart Payment Protection</h3>
-                        <p>An intelligent risk analysis engine utilizing scoring algorithms to evaluate financial transactions and flag potential fraud indicators.</p>
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-pill">Python</span>
-                        <span class="tech-pill">Pandas</span>
-                        <span class="tech-pill">Data Analysis</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="section-header">
-                <div class="section-subtitle">Get In Touch</div>
-                <h2 class="section-title">Contact Me</h2>
-            </div>
-
-            <div class="glass-panel contact-wrapper">
-                <div class="contact-info">
-                    <p>
-                        I'm currently looking for software development, AI, or data science opportunities. Feel free to send a message directly!
-                    </p>
-
-                    <a href="mailto:trishaganesh7259643961@gmail.com" class="contact-method">
-                        <div class="contact-icon-box"><i class="fa-regular fa-envelope"></i></div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <span>trishaganesh7259643961@gmail.com</span>
-                        </div>
-                    </a>
-
-                    <a href="https://github.com/TrishaGanesha" target="_blank" rel="noopener" class="contact-method">
-                        <div class="contact-icon-box"><i class="fa-brands fa-github"></i></div>
-                        <div class="contact-details">
-                            <h4>GitHub</h4>
-                            <span>github.com/TrishaGanesha</span>
-                        </div>
-                    </a>
-                </div>
-
-                <form id="contactForm" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" class="form-input" placeholder="Enter your name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" class="form-input" placeholder="name@example.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" class="form-input" placeholder="Type your message here..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-primary">
-                        Send Message <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 <strong>Trisha G</strong>. All rights reserved.</p>
-    </footer>
-
-    <!-- Visitor Name Modal -->
-    <div class="modal-overlay" id="nameModalOverlay">
-        <div class="glass-panel name-modal">
-            <!-- Mini Robot Vector Graphic -->
-            <svg class="modal-robot-icon" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="38" fill="rgba(6,182,212,0.15)" stroke="#06b6d4" stroke-width="2"/>
-                <rect x="25" y="30" width="50" height="38" rx="12" fill="#1e293b" stroke="#06b6d4" stroke-width="2"/>
-                <circle cx="40" cy="48" r="6" fill="#06b6d4"/>
-                <circle cx="60" cy="48" r="6" fill="#06b6d4"/>
-                <path d="M 42 60 Q 50 66 58 60" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <h3 style="font-family:var(--font-heading); font-size:1.6rem; margin-bottom:0.5rem;">Welcome! 👋</h3>
-            <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.5rem;">May I know your name so my Mini Robot assistant can greet you properly?</p>
-            
-            <form id="nameForm" style="display:flex; flex-direction:column; gap:1rem;">
-                <input type="text" id="visitorNameInput" class="form-input" placeholder="Enter your name..." required style="text-align:center;">
-                <button type="submit" class="btn-primary" style="justify-content:center;">Let's Explore!</button>
-            </form>
-        </div>
+    <div class="header-actions">
+      <button id="themeToggle" class="icon-button" type="button"
+        aria-label="Switch to dark theme" title="Change theme">☀️</button>
+      <button id="menuToggle" class="icon-button menu-toggle"
+        type="button" aria-label="Toggle navigation">☰</button>
     </div>
+  </header>
 
-    <!-- Mini Robot Floating Companion Widget -->
-    <div id="robotCompanion">
-        <div class="robot-wrapper" id="robotClickable">
-            <div class="speech-bubble" id="robotSpeech">Hi there! 🤖</div>
-            <svg class="robot-svg" viewBox="0 0 100 100">
-                <defs>
-                    <linearGradient id="botHead" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#334155"/>
-                        <stop offset="100%" stop-color="#0f172a"/>
-                    </linearGradient>
-                </defs>
-
-                <!-- Antenna -->
-                <line x1="50" y1="18" x2="50" y2="6" stroke="#06b6d4" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="50" cy="6" r="4" fill="#06b6d4" id="robotAntennaTip"/>
-
-                <!-- Head Base -->
-                <rect x="20" y="18" width="60" height="48" rx="16" fill="url(#botHead)" stroke="#06b6d4" stroke-width="2.5"/>
-
-                <!-- Glass Face Plate -->
-                <rect x="26" y="24" width="48" height="32" rx="10" fill="#020617"/>
-
-                <!-- Glowing Eyes -->
-                <ellipse cx="40" cy="38" rx="5" ry="6" fill="#06b6d4" id="leftEye"/>
-                <ellipse cx="60" cy="38" rx="5" ry="6" fill="#06b6d4" id="rightEye"/>
-
-                <!-- Digital Smile -->
-                <path d="M 42 48 Q 50 54 58 48" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
-
-                <!-- Thruster Ring -->
-                <ellipse cx="50" cy="74" rx="18" ry="4" fill="rgba(6,182,212,0.3)" stroke="#06b6d4" stroke-width="1.5"/>
-            </svg>
+  <main>
+    <section id="home" class="hero section">
+      <div class="hero-content">
+        <p class="eyebrow">MCA · AI & Data Science</p>
+        <h1>Hi, I'm Trisha.<br>
+          I build things with <span class="accent">code and data.</span>
+        </h1>
+        <p class="hero-description">
+          I'm a computer science graduate exploring software development,
+          data analytics and artificial intelligence. I enjoy turning
+          ideas into useful, practical projects.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary-button" href="#projects">Explore my work</a>
+          <a class="button secondary-button" href="#contact">Get in touch</a>
         </div>
-    </div>
+        <p class="small-note">Currently learning, building and improving.</p>
+      </div>
 
-    <!-- JavaScript Implementation -->
-    <script>
-        // --- 1. Audio Synthesizer for Mini Robot Sound Effects ---
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playRobotSound() {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15);
-            
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
-            
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.15);
-        }
+      <div class="hero-card">
+        <div class="profile-circle">TG</div>
+        <p class="hero-card-label">A little about me</p>
+        <h2>Curious by nature.<br>Practical by choice.</h2>
+        <div class="hero-tags">
+          <span>Python</span><span>SQL</span><span>React</span>
+          <span>Data</span><span>AI</span>
+        </div>
+      </div>
+    </section>
 
-        // --- 2. Interactive Background System (Canvas Particles) ---
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
+    <section id="about" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">A bit about me</p>
+        <h2>Learning by building</h2>
+      </div>
+      <div class="about-content">
+        <p>
+          I completed my BSc in Computer Science and Mathematics and am
+          pursuing an MCA in Artificial Intelligence and Data Science.
+          My background helps me approach problems with both programming
+          skills and analytical thinking.
+        </p>
+        <p>
+          I like understanding how things work, experimenting with tools
+          and building projects that solve real problems. I'm currently
+          developing my skills in web technologies, databases and AI.
+        </p>
+      </div>
+    </section>
 
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+    <section id="skills" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">What I work with</p>
+        <h2>Skills I'm developing</h2>
+      </div>
 
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            initParticles();
-        });
+      <div class="skills-grid">
+        <article class="skill-card">
+          <h3>Programming</h3>
+          <p>Python, SQL, JavaScript</p>
+        </article>
+        <article class="skill-card">
+          <h3>Web development</h3>
+          <p>HTML, CSS, React basics, Streamlit</p>
+        </article>
+        <article class="skill-card">
+          <h3>Data and AI</h3>
+          <p>Pandas, NumPy, data analysis, machine learning fundamentals</p>
+        </article>
+        <article class="skill-card">
+          <h3>Tools and databases</h3>
+          <p>Git, GitHub, MySQL, SQLite, VS Code</p>
+        </article>
+      </div>
+    </section>
 
-        let particles = [];
-        let mouseX = width / 2;
-        let mouseY = height / 2;
+    <section id="projects" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Things I've worked on</p>
+        <h2>My projects</h2>
+        <p class="section-description">
+          Choose a category to explore projects. Use the links to see the code.
+        </p>
+      </div>
 
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+      <div class="project-controls">
+        <div class="filter-buttons" aria-label="Filter projects">
+          <button class="filter-button active" data-filter="all" type="button">All</button>
+          <button class="filter-button" data-filter="data" type="button">Data Analytics</button>
+          <button class="filter-button" data-filter="ai" type="button">AI / ML</button>
+          <button class="filter-button" data-filter="web" type="button">Web Development</button>
+        </div>
+        <label class="search-label">
+          <span class="visually-hidden">Search projects</span>
+          <input id="projectSearch" type="search" placeholder="Search projects...">
+        </label>
+      </div>
 
-        class Particle {
-            constructor(type) {
-                this.type = type; // 'petal', 'star', 'sparkle'
-                this.reset();
-            }
+      <p id="projectCount" class="project-count" aria-live="polite"></p>
 
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * (this.type === 'petal' ? 8 : 2.5) + 1;
-                this.speedX = (Math.random() - 0.5) * 0.8;
-                this.speedY = Math.random() * 0.8 + 0.3;
-                this.opacity = Math.random() * 0.7 + 0.3;
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotSpeed = (Math.random() - 0.5) * 0.02;
+      <div id="projectGrid" class="projects-grid">
+        <article class="project-card" data-category="ai data">
+          <p class="project-type">AI / ML · Data</p>
+          <h3>Smart Payment Protection</h3>
+          <p>
+            A Python project using fuzzy risk scoring and visualizations
+            to assess payment risk from transaction-related data.
+          </p>
+          <div class="project-tags"><span>Python</span><span>Pandas</span><span>Fuzzy logic</span></div>
+          <a class="project-link"
+            href="https://github.com/TrishaGanesha/Smart-Payment-Protection-System"
+            target="_blank" rel="noopener noreferrer">View source code ↗</a>
+        </article>
 
-                // Petal Colors (Pink, Soft Blue, Cream White)
-                const colors = ['#f472b6', '#38bdf8', '#ffffff', '#fed7aa'];
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-            }
+        <article class="project-card" data-category="web">
+          <p class="project-type">Web Development</p>
+          <h3>Software Issue Management System</h3>
+          <p>
+            A database-backed project for organising software issues,
+            projects, users, comments and issue history.
+          </p>
+          <div class="project-tags"><span>SQL</span><span>MySQL</span><span>Software engineering</span></div>
+          <a class="project-link"
+            href="https://github.com/TrishaGanesha/Software-Issue-Management-System"
+            target="_blank" rel="noopener noreferrer">View source code ↗</a>
+        </article>
 
-            update(bgMode) {
-                if (bgMode === 'ocean') {
-                    // Floating flower petals & water shimmers
-                    this.y += this.speedY;
-                    this.x += this.speedX + Math.sin(this.y * 0.01) * 0.4;
-                    this.rotation += this.rotSpeed;
+        <article class="project-card" data-category="web data">
+          <p class="project-type">Governance · Web App</p>
+          <h3>GovernAI</h3>
+          <p>
+            A corporate governance assessment tool that extracts document
+            text and organises evidence for review across governance areas.
+          </p>
+          <div class="project-tags"><span>Python</span><span>Streamlit</span><span>SQLite</span></div>
+          <a class="project-link"
+            href="https://github.com/TrishaGanesha/GovernAI"
+            target="_blank" rel="noopener noreferrer">View source code ↗</a>
+        </article>
+      </div>
 
-                    if (this.y > height) this.y = -10;
-                    if (this.x > width) this.x = 0;
-                    if (this.x < 0) this.x = width;
-                } else {
-                    // Twinkling space stars
-                    this.opacity += (Math.random() - 0.5) * 0.04;
-                    if (this.opacity < 0.2) this.opacity = 0.2;
-                    if (this.opacity > 0.9) this.opacity = 0.9;
-                }
-            }
+      <p id="noProjects" class="empty-message" hidden>
+        No projects match your search. Try another keyword or category.
+      </p>
+    </section>
 
-            draw(bgMode) {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
+    <section id="contact" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Let's connect</p>
+        <h2>Have something in mind?</h2>
+        <p class="section-description">
+          Send a message or find me on GitHub.
+        </p>
+      </div>
 
-                if (bgMode === 'ocean') {
-                    ctx.translate(this.x, this.y);
-                    ctx.rotate(this.rotation);
-                    ctx.fillStyle = this.color;
-                    ctx.beginPath();
-                    ctx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2);
-                    ctx.fill();
-                } else {
-                    ctx.fillStyle = "#ffffff";
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                ctx.restore();
-            }
-        }
+      <form id="contactForm" class="contact-form">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" placeholder="Enter your name" required>
 
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 70; i++) {
-                particles.push(new Particle(document.body.getAttribute('data-bg') === 'ocean' ? 'petal' : 'star'));
-            }
-        }
-        initParticles();
+        <label for="email">Your email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required>
 
-        function renderCanvas() {
-            const bgMode = document.body.getAttribute('data-bg');
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5"
+          placeholder="Write your message..." required></textarea>
 
-            if (bgMode === 'ocean') {
-                // Ocean Gradient Background
-                const grad = ctx.createLinearGradient(0, 0, 0, height);
-                grad.addColorStop(0, '#e0f2fe');
-                grad.addColorStop(0.5, '#bae6fd');
-                grad.addColorStop(1, '#7dd3fc');
-                ctx.fillStyle = grad;
-                ctx.fillRect(0, 0, width, height);
-            } else {
-                // Space Dark Gradient Background
-                const grad = ctx.createRadialGradient(mouseX, mouseY, 50, width / 2, height / 2, Math.max(width, height));
-                grad.addColorStop(0, '#1e1b4b');
-                grad.addColorStop(0.5, '#0f172a');
-                grad.addColorStop(1, '#020617');
-                ctx.fillStyle = grad;
-                ctx.fillRect(0, 0, width, height);
-            }
+        <button class="button primary-button" type="submit">Prepare email ↗</button>
+        <p id="formStatus" class="form-status" aria-live="polite">
+          Your email app will open with your message prepared.
+        </p>
+      </form>
 
-            particles.forEach(p => {
-                p.update(bgMode);
-                p.draw(bgMode);
-            });
+      <p class="github-line">
+        Find my work on
+        <a href="https://github.com/TrishaGanesha"
+          target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </p>
+    </section>
+  </main>
 
-            requestAnimationFrame(renderCanvas);
-        }
-        renderCanvas();
-
-        // --- 3. Background Theme & Light/Dark Mode Controls ---
-        const bgToggleBtn = document.getElementById('bgToggleBtn');
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-
-        bgToggleBtn.addEventListener('click', () => {
-            const currentBg = document.body.getAttribute('data-bg');
-            const newBg = currentBg === 'ocean' ? 'space' : 'ocean';
-            document.body.setAttribute('data-bg', newBg);
-            bgToggleBtn.querySelector('i').className = newBg === 'ocean' ? 'fa-solid fa-water' : 'fa-solid fa-shuttle-space';
-            initParticles();
-        });
-
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = document.body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.body.setAttribute('data-theme', newTheme);
-            themeToggleBtn.querySelector('i').className = newTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-        });
-
-        // --- 4. Visitor Name Onboarding Modal & Personalization ---
-        const modalOverlay = document.getElementById('nameModalOverlay');
-        const nameForm = document.getElementById('nameForm');
-        const visitorNameInput = document.getElementById('visitorNameInput');
-        const contactNameInput = document.getElementById('name');
-        
-        let storedVisitorName = localStorage.getItem('trisha_portfolio_visitor') || '';
-
-        if (!storedVisitorName) {
-            setTimeout(() => {
-                modalOverlay.classList.add('active');
-            }, 500);
-        } else {
-            contactNameInput.value = storedVisitorName;
-        }
-
-        nameForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const enteredName = visitorNameInput.value.trim();
-            if (enteredName) {
-                storedVisitorName = enteredName;
-                localStorage.setItem('trisha_portfolio_visitor', storedVisitorName);
-                contactNameInput.value = storedVisitorName;
-                modalOverlay.classList.remove('active');
-
-                // Robot Greets User By Name
-                triggerRobotSpeech(`Nice to meet you, ${storedVisitorName}! 🤖✨`, 6000);
-            }
-        });
-
-        // --- 5. Mini Robot Companion Following Physics & Logic ---
-        const robot = document.getElementById('robotCompanion');
-        const robotClickable = document.getElementById('robotClickable');
-        const speechBubble = document.getElementById('robotSpeech');
-        const leftEye = document.getElementById('leftEye');
-        const rightEye = document.getElementById('rightEye');
-        const antennaTip = document.getElementById('robotAntennaTip');
-
-        let botX = window.innerWidth / 2;
-        let botY = window.innerHeight / 2;
-        let targetX = botX;
-        let targetY = botY;
-
-        window.addEventListener('mousemove', (e) => {
-            targetX = e.clientX + 25;
-            targetY = e.clientY + 25;
-        });
-
-        function animateRobot() {
-            botX += (targetX - botX) * 0.08;
-            botY += (targetY - botY) * 0.08;
-            
-            robot.style.transform = `translate3d(${botX}px, ${botY}px, 0)`;
-            requestAnimationFrame(animateRobot);
-        }
-        animateRobot();
-
-        function triggerRobotSpeech(text, duration = 4000) {
-            speechBubble.textContent = text;
-            speechBubble.classList.add('active');
-            setTimeout(() => {
-                speechBubble.classList.remove('active');
-            }, duration);
-        }
-
-        // Default greeting if user already logged in
-        if (storedVisitorName) {
-            setTimeout(() => {
-                triggerRobotSpeech(`Welcome back, ${storedVisitorName}! 🤖`, 5000);
-            }, 1200);
-        }
-
-        // Robot Interactive Click Event
-        const eyeColors = ['#06b6d4', '#ec4899', '#84cc16', '#eab308', '#a855f7'];
-        let colorIndex = 0;
-
-        robotClickable.addEventListener('click', () => {
-            playRobotSound();
-
-            // Cycle LED Eye Colors
-            colorIndex = (colorIndex + 1) % eyeColors.length;
-            const newColor = eyeColors[colorIndex];
-            leftEye.setAttribute('fill', newColor);
-            rightEye.setAttribute('fill', newColor);
-            antennaTip.setAttribute('fill', newColor);
-
-            // Playful Quotes
-            const name = storedVisitorName || 'friend';
-            const quotes = [
-                `Beep boop! Exploring with ${name}! 🚀`,
-                `All systems nominal, ${name}! ⚡`,
-                `Trisha built me to help you navigate! 💻`,
-                `Click on 'Projects' to see cool work! 🎨`,
-                `You look awesome today, ${name}! 😊`
-            ];
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            triggerRobotSpeech(randomQuote, 4500);
-        });
-
-        // --- 6. Projects Search & Tag Filtering ---
-        const searchInput = document.getElementById('searchInput');
-        const filterBtns = document.querySelectorAll('.tag-btn');
-        const projectCards = document.querySelectorAll('.project-card');
-        let currentFilter = 'all';
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.getAttribute('data-filter');
-                filterProjects();
-            });
-        });
-
-        searchInput.addEventListener('input', filterProjects);
-
-        function filterProjects() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-
-            projectCards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const desc = card.querySelector('p').textContent.toLowerCase();
-                const tags = card.getAttribute('data-tags') || '';
-
-                const matchesFilter = currentFilter === 'all' || tags.includes(currentFilter);
-                const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
-
-                card.style.display = (matchesFilter && matchesSearch) ? 'flex' : 'none';
-            });
-        }
-
-        // --- 7. Local Mailto Contact Form Handler ---
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            const targetEmail = "trishaganesh7259643961@gmail.com";
-            const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-
-            window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
-        });
-    </script>
+  <footer class="footer">
+    <p>Made by Trisha G · <span id="currentYear"></span></p>
+    <a href="#home">Back to top ↑</a>
+  </footer>
 </body>
 </html>
